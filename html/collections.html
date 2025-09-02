@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aa'In - Our Collection</title>
+  <link rel="stylesheet" href="../css/collections.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="nav-header">
+    <nav class="nav-bar">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="collections.html" class="nav-link active">Collections</a>
+      <a href="reviews.html" class="nav-link">Reviews</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Our Collection</h2>
+    </div>
+  </section>
+
+  <!-- Collections Grid -->
+  <section class="collections-section">
+    <div class="container">
+      <div class="collections-grid">
+
+        <!-- Layali -->
+        <div class="collection-card" data-title="Layali" data-price="45 AED" data-desc="Layali is a premium dark chocolate, rich in flavor and perfect for chocolate lovers seeking deep cocoa taste.">
+          <div class="card-border">
+            <img src="../assets/layali.jpg" alt="Layali">
+          </div>
+          <div class="card-body">
+            <h3>Layali</h3>
+            <p class="desc">Rich dark chocolate with pistachio cream, saffron, and rose water.</p>
+            <button class="btn add-to-cart" data-title="Layali" data-price="45 AED">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- True Matcha -->
+        <div class="collection-card" data-title="True Matcha" data-price="50 AED" data-desc="True Matcha combines high-quality matcha powder with creamy chocolate, creating a unique, refreshing flavor loved by connoisseurs.">
+          <div class="card-border">
+            <img src="../assets/truematcha.jpg" alt="True Matcha">
+          </div>
+          <div class="card-body">
+            <h3>True Matcha</h3>
+            <p class="desc">Earthy matcha meets creamy white chocolate</p>
+            <button class="btn add-to-cart" data-title="True Matcha" data-price="50 AED">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Creame of Us -->
+        <div class="collection-card" data-title="Creame of Us" data-price="55 AED" data-desc="Creame of Us is crafted with smooth French crème, offering a luxurious melt-in-your-mouth chocolate experience.">
+          <div class="card-border">
+            <img src="../assets/creameofus.jpg" alt="Creame of Us">
+          </div>
+          <div class="card-body">
+            <h3>Creame of Us</h3>
+            <p class="desc">Velvety white chocolate custard with a hint of vanilla</p>
+            <button class="btn add-to-cart" data-title="Creame of Us" data-price="55 AED">Add to Cart</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkout Bar -->
+  <div class="checkout-bar">
+    <ul class="cart-list"></ul>
+    <div class="cart-summary"></div>
+    <select class="payment-method">
+      <option value="card">Card</option>
+      <option value="cash">Cash on Delivery (+10 AED)</option>
+    </select>
+    <button class="btn checkout-btn">Checkout</button>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast"></div>
+
+  <!-- Card Details Pop-up -->
+  <div class="card-popup hidden">
+    <div class="card-popup-inner">
+      <h3>Enter Card Details</h3>
+      <input type="text" class="card-number" placeholder="Card Number (16 digits)" maxlength="19">
+      <input type="text" class="card-expiry" placeholder="MM/YY">
+      <button class="btn card-submit">Pay</button>
+      <button class="btn card-close">X</button>
+    </div>
+  </div>
+
+  <script src="../js/collections.js"></script>
+</body>
+</html>

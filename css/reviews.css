@@ -1,0 +1,87 @@
+:root{
+  --pink: #ff4fa3;
+  --pink-2: #ff9ecb;
+  --white: #ffffff;
+  --muted: #6b6b6b;
+  --shadow: 0 12px 30px rgba(13,13,13,0.08);
+  --radius: 18px;
+  --max-width: 1200px;
+}
+
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Playfair Display","Inter",sans-serif;background: linear-gradient(135deg,#ff4fa3,#ff9ecb); color:#222;}
+
+/* Navbar (like collections.html) */
+.site-header{
+  position:sticky; top:0; z-index:900; display:flex; align-items:center; justify-content:space-between;
+  padding:14px 28px; background:rgba(255,255,255,0.75); backdrop-filter: blur(8px); box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+}
+.brand{ display:flex; align-items:center; gap:10px }
+.brand-logo{ width:40px; height:40px; object-fit:contain }
+.brand-name{ font-weight:700; color:var(--pink); font-size:1.1rem }
+.site-nav{ display:flex; gap:18px; align-items:center }
+.nav-link{
+  position:relative; text-decoration:none; color:#222; font-weight:500; padding:8px 10px; border-radius:999px; transition:transform .12s ease, color .18s ease;
+}
+.nav-link::before{
+  content:""; position:absolute; inset:0; border-radius:999px; background:linear-gradient(90deg, rgba(255,79,163,0.12), rgba(255,158,203,0.06));
+  transform:scaleX(0); transform-origin:center; transition: transform .22s ease;
+}
+.nav-link:hover::before{ transform:scaleX(1) }
+.nav-link:hover{ color:var(--pink); transform:translateY(-3px) }
+.nav-link:active{ transform:translateY(1px) scale(.98) }
+
+/* Hero */
+.hero{
+  height:250px;
+  display:flex; justify-content:center; align-items:center; position:relative;
+  background: linear-gradient(135deg,#ff4fa3,#ff9ecb);
+}
+.hero-content h2{
+  color:#fff; font-size:2.5rem; animation: breathe 2s infinite alternate;
+}
+@keyframes breathe{0%{transform:scale(1)}100%{transform:scale(1.05)}}
+
+/* Reviews Grid */
+.container{ max-width:var(--max-width); margin:0 auto; padding:40px 20px; }
+.section-title{ color:#fff; text-align:center; margin-bottom:20px; font-size:1.8rem; }
+.reviews-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+.review-card{
+  background: rgba(255,255,255,0.85); padding:16px; border-radius:18px; box-shadow:var(--shadow);
+  transition: transform .16s ease; cursor:pointer;
+}
+.review-card:hover{ transform:translateY(-6px); }
+.review-stars{ color:#ffba00; font-size:1rem; margin-bottom:6px; }
+.reviewer-name{ font-weight:700; margin-bottom:6px; color:var(--pink); }
+.review-text{ color:var(--muted); font-size:0.95rem; }
+
+/* Leave Review Button */
+.leave-review-btn{
+  position:fixed; bottom:20px; right:20px; background:var(--pink); color:#fff; border:none;
+  border-radius:999px; padding:12px 20px; font-weight:600; cursor:pointer;
+  box-shadow:0 6px 20px rgba(255,79,163,0.18); transition:.2s;
+}
+.leave-review-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 28px rgba(255,79,163,0.22); }
+.leave-review-btn:active{ transform:translateY(1px) scale(.98); }
+
+/* Review Popup */
+.review-popup{ position:fixed; inset:0; display:grid; place-items:center; background: rgba(0,0,0,0.36); z-index:9998; }
+.review-popup.hidden{ display:none; }
+.review-popup-inner{
+  background:var(--white); padding:20px; border-radius:18px; width:320px; max-width:90vw; display:flex; flex-direction:column; gap:12px;
+}
+.review-popup-inner input, .review-popup-inner textarea, .review-popup-inner select{
+  padding:8px 10px; border-radius:12px; border:1px solid #ccc; font-size:1rem;
+}
+.review-popup-inner textarea{ resize:none; }
+.review-popup-inner .btn{ width:100%; padding:8px; border-radius:999px; background:var(--pink); color:#fff; font-weight:600; border:none; cursor:pointer; }
+.review-popup-inner .card-close{ background:#eee; color:#222; font-weight:600; border:none; cursor:pointer; }
+
+/* Toast */
+.toast{
+  position:fixed; right:20px; bottom:70px; background:linear-gradient(90deg,var(--pink),var(--pink-2)); color:white;
+  padding:10px 14px; border-radius:999px; box-shadow:var(--shadow);
+  transform:translateY(20px); opacity:0; transition: transform .18s ease, opacity .18s ease; z-index:9999
+}
+.toast.show{ transform:translateY(0); opacity:1 }

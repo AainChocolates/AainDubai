@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aa'In Reviews</title>
+  <link rel="stylesheet" href="../css/reviews.css">
+  <link rel="icon" href="../assets/logo.png" type="image/png">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="brand">
+      <img src="../assets/logo.png" alt="Aa'In Logo" class="brand-logo">
+      <span class="brand-name">Aa'In</span>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="collections.html" class="nav-link">Collections</a>
+      <a href="reviews.html" class="nav-link">Reviews</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Our Reviews</h2>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="container">
+    <h3 class="section-title">Customer Feedback</h3>
+    <div class="reviews-grid">
+      <!-- Example review -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <h4 class="reviewer-name">Kanika</h4>
+        <p class="review-text">Absolutely loved the Layali chocolate, so rich and smooth!</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <h4 class="reviewer-name">Alexander</h4>
+        <p class="review-text">Creame of Us is heavenly! The French cream flavor is perfect.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leave a Review Button -->
+  <button class="btn leave-review-btn">Leave a Review</button>
+
+  <!-- Review Popup -->
+  <div class="review-popup hidden">
+    <div class="review-popup-inner">
+      <h3>Leave a Review</h3>
+      <input type="text" id="reviewer-name" placeholder="Your Name">
+      <select id="review-rating" class="payment-method">
+        <option value="">Select Rating</option>
+        <option value="★☆☆☆☆">1 Star</option>
+        <option value="★★☆☆☆">2 Stars</option>
+        <option value="★★★☆☆">3 Stars</option>
+        <option value="★★★★☆">4 Stars</option>
+        <option value="★★★★★">5 Stars</option>
+      </select>
+      <textarea id="review-text" placeholder="Your Review" rows="3"></textarea>
+      <input type="file" id="review-file">
+      <div class="review-popup-buttons">
+        <button class="btn submit-review-btn">Submit</button>
+        <button class="btn card-close review-close">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast"></div>
+
+  <script src="../js/reviews.js"></script>
+</body>
+</html>
