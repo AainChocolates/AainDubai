@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Cart - Aa'In</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink-light: #ffe6f0;
+  --pink: #f8c6dc;
+  --pink-dark: #e75480;
+  --white: #ffffff;
+  --text-dark: #2c2c2c;
+}
+body {
+  margin:0;
+  font-family:'Montserrat', sans-serif;
+  background:var(--white);
+  color:var(--text-dark);
+}
+header {
+  background: linear-gradient(90deg, var(--pink-light), var(--white));
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 2rem;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+header .brand {
+  font-family: 'Playfair Display', serif;
+  font-size:24px;
+  font-weight:600;
+  color:var(--pink-dark);
+}
+nav a {
+  margin-left:20px;
+  text-decoration:none;
+  color:var(--text-dark);
+  font-weight:600;
+  position:relative;
+}
+nav a::after {
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  bottom:-4px;
+  left:0;
+  background:var(--pink-dark);
+  transition:width .3s ease;
+}
+nav a:hover::after { width:100%; }
+
+.container {
+  max-width:1100px;
+  margin:2rem auto;
+  padding:0 1rem;
+}
+h1 {
+  text-align:center;
+  font-family:'Playfair Display', serif;
+  margin-bottom:1.5rem;
+  color:var(--pink-dark);
+}
+.cart-items {
+  background:var(--pink-light);
+  padding:1.5rem;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom:2rem;
+}
+.cart-items table {
+  width:100%;
+  border-collapse:collapse;
+}
+.cart-items th, .cart-items td {
+  padding:10px;
+  text-align:center;
+}
+.cart-items th {
+  background:var(--pink);
+}
+.cart-items td {
+  border-bottom:1px solid #ddd;
+}
+.total-box {
+  background:var(--white);
+  padding:1rem;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom:2rem;
+}
+.total-box p {
+  font-size:18px;
+  margin:8px 0;
+}
+form {
+  background:var(--pink-light);
+  padding:1.5rem;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+form label {
+  display:block;
+  margin-top:12px;
+  font-weight:600;
+}
+form input, form select {
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border:1px solid #ccc;
+  border-radius:6px;
+}
+.payment-extra {
+  display:none;
+  margin-top:10px;
+}
+button.checkout-btn {
+  margin-top:20px;
+  padding:12px 24px;
+  background:var(--pink-dark);
+  border:none;
+  color:var(--white);
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  transition:background 0.3s ease;
+}
+button.checkout-btn:hover { background:#b93a63; }
+
+footer {
+  background: var(--pink-dark);
+  color: var(--white);
+  text-align:center;
+  padding:1.5rem;
+  margin-top:3rem;
+}
+footer a {
+  color:var(--white);
+  margin:0 10px;
+  text-decoration:none;
+  font-size:14px;
+}
+footer a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Aa'In</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="cart.html">Cart</a>
+    <a href="contact.html">Contact</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>Your Cart</h1>
+  
+  <div class="cart-items">
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Price (AED)</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  
+  <div class="total-box">
+    <p><strong>Subtotal:</strong> <span id="subtotal">0</span> AED</p>
+    <p><strong>Extra (Cash Fee):</strong> <span id="extra">0</span> AED</p>
+    <p><strong>Total:</strong> <span id="total">0</span> AED</p>
+  </div>
+  
+  <form id="checkoutForm">
+    <h2>Checkout Details</h2>
+    
+    <label for="name">Full Name</label>
+    <input type="text" id="name" required>
+    
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" required>
+    
+    <label for="address">Delivery Address</label>
+    <input type="text" id="address" required>
+    
+    <label>Payment Method</label>
+    <select id="payment" required>
+      <option value="">Select</option>
+      <option value="cash">Cash on Delivery (+10 AED)</option>
+      <option value="card">Card</option>
+    </select>
+    
+    <div class="payment-extra" id="cardDetails">
+      <label for="cardNumber">Card Number</label>
+      <input type="text" id="cardNumber">
+      
+      <label for="expiry">Expiry Date</label>
+      <input type="text" id="expiry" placeholder="MM/YY">
+      
+      <label for="cvv">CVV</label>
+      <input type="text" id="cvv">
+    </div>
+    
+    <button type="submit" class="checkout-btn">Place Order</button>
+  </form>
+</div>
+
+<footer>
+  <p>&copy; 2025 Aa'In Chocolates. All Rights Reserved.</p>
+  <div>
+    <a href="#">Terms of Service</a> | 
+    <a href="#">Refund Policy</a> | 
+    <a href="#">Privacy Policy</a> | 
+    <a href="#">Corporate Social Responsibility</a>
+  </div>
+</footer>
+
+<script>
+// Load cart from localStorage
+function loadCart() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const tbody = document.querySelector("#cartTable tbody");
+  tbody.innerHTML = "";
+  let subtotal = 0;
+
+  cart.forEach(item => {
+    const qty = item.qty && !isNaN(item.qty) ? parseInt(item.qty) : 1; // fallback
+    const price = parseFloat(item.price) || 0;
+    const sub = price * qty;
+    subtotal += sub;
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${item.name || "Unknown Item"}</td>
+      <td>${price.toFixed(2)}</td>
+      <td>${qty}</td>
+      <td>${sub.toFixed(2)}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+  updateTotal();
+}
+
+function updateTotal() {
+  const subtotal = parseFloat(document.getElementById("subtotal").textContent) || 0;
+  const payment = document.getElementById("payment").value;
+  let extra = 0;
+  if (payment === "cash") { extra = 10; }
+  document.getElementById("extra").textContent = extra.toFixed(2);
+  document.getElementById("total").textContent = (subtotal + extra).toFixed(2);
+}
+
+document.getElementById("payment").addEventListener("change", e=>{
+  if (e.target.value === "card") {
+    document.getElementById("cardDetails").style.display = "block";
+  } else {
+    document.getElementById("cardDetails").style.display = "none";
+  }
+  updateTotal();
+});
+
+document.getElementById("checkoutForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  alert("Order placed successfully! Thank you for shopping with Aa'In.");
+  localStorage.removeItem("cart");
+  loadCart();
+  e.target.reset();
+  updateTotal();
+});
+
+window.addEventListener("load", loadCart);
+</script>
+</body>
+</html>

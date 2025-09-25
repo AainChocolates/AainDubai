@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery - Aa'In</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink-light: #ffe6f0;
+  --pink: #f8c6dc;
+  --pink-dark: #e75480;
+  --white: #ffffff;
+  --text-dark: #2c2c2c;
+}
+
+body {
+  margin:0;
+  font-family:'Montserrat', sans-serif;
+  background:var(--white);
+  color:var(--text-dark);
+}
+
+header {
+  background: linear-gradient(90deg, var(--pink-light), var(--white));
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 2rem;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+header .brand {
+  font-family: 'Playfair Display', serif;
+  font-size:24px;
+  font-weight:600;
+  color:var(--pink-dark);
+}
+nav a {
+  margin-left:20px;
+  text-decoration:none;
+  color:var(--text-dark);
+  font-weight:600;
+  position:relative;
+}
+nav a::after {
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  bottom:-4px;
+  left:0;
+  background:var(--pink-dark);
+  transition:width .3s ease;
+}
+nav a:hover::after { width:100%; }
+
+.container {
+  max-width:1100px;
+  margin:2rem auto;
+  padding:0 1rem;
+}
+h1 {
+  text-align:center;
+  font-family:'Playfair Display', serif;
+  margin-bottom:2rem;
+  color:var(--pink-dark);
+}
+
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.gallery-grid img {
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-grid img:hover {
+  transform:scale(1.05);
+  box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Lightbox */
+.lightbox {
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+  z-index:1000;
+}
+.lightbox.show {
+  opacity:1;
+  pointer-events:auto;
+}
+.lightbox img {
+  max-width:90%;
+  max-height:80%;
+  border-radius:12px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.4);
+}
+.lightbox .controls {
+  position:absolute;
+  top:50%;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:0 20px;
+  transform:translateY(-50%);
+}
+.lightbox button {
+  background:var(--pink-dark);
+  color:var(--white);
+  border:none;
+  border-radius:50%;
+  width:45px;
+  height:45px;
+  font-size:20px;
+  cursor:pointer;
+  opacity:0.8;
+  transition:opacity 0.3s ease;
+}
+.lightbox button:hover { opacity:1; }
+.lightbox .close-btn {
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:var(--pink-dark);
+  border-radius:8px;
+  width:auto;
+  padding:8px 15px;
+  font-size:16px;
+}
+
+footer {
+  background: var(--pink-dark);
+  color: var(--white);
+  text-align:center;
+  padding:1.5rem;
+  margin-top:3rem;
+}
+footer a {
+  color:var(--white);
+  margin:0 10px;
+  text-decoration:none;
+  font-size:14px;
+}
+footer a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Aa'In</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="cart.html">Cart</a>
+    <a href="contact.html">Contact</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>Our Gallery</h1>
+  <div class="gallery-grid">
+    <img src="1.png" alt="Chocolate 1">
+    <img src="2.png" alt="Chocolate 2">
+    <img src="3.png" alt="Chocolate 3">
+    <img src="4.png" alt="Chocolate 4">
+    <img src="5.png" alt="Chocolate 5">
+    <img src="6.png" alt="Chocolate 6">
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="close-btn" id="closeBtn">Close ✕</button>
+  <img src="" alt="Expanded" id="lightboxImg">
+  <div class="controls">
+    <button id="prevBtn">‹</button>
+    <button id="nextBtn">›</button>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Aa'In Chocolates. All Rights Reserved.</p>
+  <div>
+    <a href="#">Terms of Service</a> | 
+    <a href="#">Refund Policy</a> | 
+    <a href="#">Privacy Policy</a> | 
+    <a href="#">Corporate Social Responsibility</a>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const images = document.querySelectorAll(".gallery-grid img");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const closeBtn = document.getElementById("closeBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const prevBtn = document.getElementById("prevBtn");
+  let currentIndex = 0;
+
+  function showLightbox(index) {
+    currentIndex = index;
+    lightboxImg.src = images[index].src;
+    lightbox.classList.add("show");
+  }
+
+  function hideLightbox() {
+    lightbox.classList.remove("show");
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % images.length;
+    lightboxImg.src = images[currentIndex].src;
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    lightboxImg.src = images[currentIndex].src;
+  }
+
+  images.forEach((img, index) => {
+    img.addEventListener("click", () => showLightbox(index));
+  });
+
+  closeBtn.addEventListener("click", hideLightbox);
+  nextBtn.addEventListener("click", showNext);
+  prevBtn.addEventListener("click", showPrev);
+
+  // Close on background click
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) hideLightbox();
+  });
+
+  // Close on ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") hideLightbox();
+    if (e.key === "ArrowRight") showNext();
+    if (e.key === "ArrowLeft") showPrev();
+  });
+});
+</script>
+</body>
+</html>

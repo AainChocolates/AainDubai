@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Aa'In Chocolates</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="Logo-removebg-preview (1).png">
+
+<!-- Luxury Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<!-- ================== CSS ================== -->
+<style>
+  :root {
+    --pink-light: #ffe6f0;
+    --pink: #f8c6dc;
+    --pink-dark: #e75480;
+    --white: #ffffff;
+    --text-dark: #2c2c2c;
+  }
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    line-height:1.5;
+    scroll-behavior: smooth;
+  }
+
+  /* ===== Loader ===== */
+  #loading {
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(180deg, var(--pink), var(--white));
+    z-index:9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #loading.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+  #loading .logo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 64px;
+    color: var(--pink-dark);
+    margin-bottom: 12px;
+    opacity:0;
+    animation: fadeIn 1s forwards;
+  }
+  #loading .tagline {
+    font-size: 18px;
+    color: #444;
+    opacity:0;
+    animation: fadeIn 1s 0.3s forwards;
+  }
+  @keyframes fadeIn { to { opacity:1; } }
+
+  /* ===== Navbar ===== */
+  header {
+    position:sticky;
+    top:0;
+    background: linear-gradient(90deg, var(--pink-light), var(--white));
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0.5rem 2rem;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    z-index:10;
+  }
+  header .logo {
+    display:flex;
+    align-items:center;
+  }
+  header .logo img {
+    height:40px;
+    width:auto;
+  }
+  nav a {
+    margin-left:20px;
+    text-decoration:none;
+    color:var(--text-dark);
+    font-weight:600;
+    font-family: 'Montserrat', sans-serif;
+    position:relative;
+    transition:color .3s;
+  }
+  nav a.active,
+  nav a:hover {
+    color: var(--pink-dark);
+  }
+  nav a::after {
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    bottom:-4px;
+    left:0;
+    background:var(--pink-dark);
+    transition:width .3s ease;
+  }
+  nav a:hover::after,
+  nav a.active::after { width:100%; }
+
+  /* ===== Hero Section ===== */
+  .hero {
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:2rem;
+    color:var(--white);
+    background: linear-gradient(rgba(232,84,128,0.55), rgba(255,230,240,0.65)),
+                url("https://via.placeholder.com/1200x800") no-repeat center/cover;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size:52px;
+    margin-bottom:20px;
+    animation: slideDown 1s ease forwards;
+    opacity:0;
+  }
+  .hero p {
+    font-size:20px;
+    max-width:600px;
+    margin-bottom:30px;
+    opacity:0;
+    animation: fadeIn 1s 0.6s forwards;
+  }
+  .hero a.button {
+    background:var(--pink-dark);
+    color:var(--white);
+    padding:14px 28px;
+    border-radius:30px;
+    font-size:18px;
+    text-decoration:none;
+    transition:background .3s ease, transform .3s ease;
+    opacity:0;
+    animation: fadeIn 1s 1s forwards;
+  }
+  .hero a.button:hover {
+    background:#b93a63;
+    transform:scale(1.05);
+  }
+  @keyframes slideDown {
+    from { opacity:0; transform:translateY(-40px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  /* ===== Info Section ===== */
+  .info {
+    padding:4rem 2rem;
+    text-align:center;
+    background:var(--pink-light);
+  }
+  .info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size:36px;
+    margin-bottom:2rem;
+    color:var(--pink-dark);
+  }
+  .info-cards {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:2rem;
+  }
+  .info-card {
+    background:var(--white);
+    border-radius:16px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    overflow:hidden;
+    max-width:280px;
+    cursor:pointer;
+    transition: transform .3s ease;
+  }
+  .info-card:hover { transform:translateY(-5px); }
+  .info-card img {
+    width:100%;
+    height:160px;
+    object-fit:cover;
+  }
+  .info-card h3 {
+    font-family: 'Playfair Display', serif;
+    color:var(--pink-dark);
+    margin:1rem;
+  }
+  .info-card p {
+    font-size:14px;
+    margin:0 1rem 1rem;
+    color:#555;
+  }
+
+  /* ===== Modal Expanded View ===== */
+  .modal-overlay {
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(6px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:10000;
+  }
+  .modal-overlay.active { display:flex; }
+  .modal {
+    background:var(--white);
+    border-radius:16px;
+    max-width:700px;
+    width:90%;
+    max-height:80vh;
+    overflow:auto;
+    padding:2rem;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    animation: popIn 0.4s ease forwards;
+  }
+  @keyframes popIn {
+    from { opacity:0; transform:scale(0.9); }
+    to { opacity:1; transform:scale(1); }
+  }
+  .modal img {
+    width:100%;
+    border-radius:12px;
+    margin-bottom:1rem;
+  }
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    color:var(--pink-dark);
+    margin-bottom:1rem;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    background: var(--pink-dark);
+    color: var(--white);
+    text-align:center;
+    padding:1.5rem;
+  }
+  footer nav {
+    margin-top:1rem;
+  }
+  footer nav a {
+    color:var(--white);
+    margin:0 10px;
+    text-decoration:none;
+    font-size:14px;
+  }
+  footer nav a:hover { text-decoration:underline; }
+
+  /* ===== Main page fade in ===== */
+  .main { opacity:0; transition: opacity 0.8s ease; }
+  body.loaded .main { opacity:1; }
+</style>
+</head>
+<body>
+  <!-- ================== Loader ================== -->
+  <div id="loading">
+    <div class="logo">Aa'In</div>
+    <div class="tagline">Eat Aa'In, Feel Loved.</div>
+  </div>
+
+  <!-- ================== Main Page ================== -->
+  <div class="main">
+    <!-- Navbar -->
+    <header>
+      <a href="index.html" class="logo">
+        <img src="Logo-removebg-preview (1).png" alt="Aa'In Logo">
+      </a>
+      <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="cart.html">Cart</a>
+        <a href="contact.html">Contact</a>
+        <a href="gallery.html">Gallery</a>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <h1>Welcome to Aa'In Chocolates</h1>
+      <p>Handcrafted luxury chocolates, designed to make every bite unforgettable. Discover the sweet world of Aa'In, where love meets indulgence.</p>
+      <a href="shop.html" class="button">Shop Now</a>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info" id="discover">
+      <h2>Discover Aa'In</h2>
+      <div class="info-cards">
+        <div class="info-card" data-title="Our Story" data-img="https://via.placeholder.com/700x400" data-text="Aa'In was born from a passion for crafting the most exquisite chocolates that not only satisfy your taste buds but also warm your heart. From sourcing the finest cocoa to hand-packing each box, our journey is about creating memories, not just sweets.">
+          <img src="chef.png" alt="Our Story">
+          <h3>Our Story</h3>
+          <p>A journey of love and chocolate...</p>
+        </div>
+        <div class="info-card" data-title="Why Us?" data-img="https://via.placeholder.com/700x400" data-text="At Aa'In, we go beyond taste. Our chocolates are designed to be an experience — from the luxurious packaging to the delicate flavors. Every piece is a blend of artistry and passion.">
+          <img src="Logo-removebg-preview (1).png" alt="Why Us">
+          <h3>Why Us?</h3>
+          <p>Luxury, passion, and perfection...</p>
+        </div>
+        <div class="info-card" data-title="Our Promise" data-img="https://via.placeholder.com/700x400" data-text="We promise more than chocolate — we promise an unforgettable journey. Whether you’re gifting a loved one or treating yourself, Aa'In ensures every box speaks volumes of affection.">
+          <img src="cocoa.png" alt="Our Promise">
+          <h3>Our Promise</h3>
+          <p>Our vow of quality and love...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2025 Aa'In Chocolates. All Rights Reserved.
+      <nav>
+        <a href="terms.html">Terms of Service</a> | 
+        <a href="refund.html">Refund Policy</a> | 
+        <a href="privacy.html">Privacy Policy</a> | 
+        <a href="csr.html">Corporate Social Responsibility</a>
+      </nav>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalContent">
+      <img src="" alt="">
+      <h3></h3>
+      <p></p>
+    </div>
+  </div>
+
+<!-- ================== JavaScript ================== -->
+<script>
+(function(){
+  const loading = document.getElementById('loading');
+  function finishLoading(){
+    document.body.classList.add('loaded');
+    loading.classList.add('hidden');
+  }
+  window.addEventListener('load', ()=>{
+    setTimeout(finishLoading, 2000);
+  });
+
+  // Modal handling
+  const overlay = document.getElementById('modalOverlay');
+  const modalImg = document.querySelector('#modalContent img');
+  const modalTitle = document.querySelector('#modalContent h3');
+  const modalText = document.querySelector('#modalContent p');
+
+  document.querySelectorAll('.info-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      modalImg.src = card.dataset.img;
+      modalTitle.textContent = card.dataset.title;
+      modalText.textContent = card.dataset.text;
+      overlay.classList.add('active');
+    });
+  });
+
+  overlay.addEventListener('click', e=>{
+    if(e.target === overlay) overlay.classList.remove('active');
+  });
+
+  // Navbar active link highlight
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll("nav a[href^='#']");
+  window.addEventListener("scroll", ()=>{
+    let scrollY = window.pageYOffset;
+    sections.forEach(sec=>{
+      const secTop = sec.offsetTop - 80;
+      const secHeight = sec.offsetHeight;
+      if(scrollY >= secTop && scrollY < secTop + secHeight){
+        navLinks.forEach(link=> link.classList.remove("active"));
+        const activeLink = document.querySelector(`nav a[href="#${sec.id}"]`);
+        if(activeLink) activeLink.classList.add("active");
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

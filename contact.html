@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us - Aa'In</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink-light: #ffe6f0;
+  --pink: #f8c6dc;
+  --pink-dark: #e75480;
+  --white: #ffffff;
+  --text-dark: #2c2c2c;
+}
+
+body {
+  margin:0;
+  font-family:'Montserrat', sans-serif;
+  background:var(--white);
+  color:var(--text-dark);
+}
+
+header {
+  background: linear-gradient(90deg, var(--pink-light), var(--white));
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 2rem;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+header .brand {
+  font-family: 'Playfair Display', serif;
+  font-size:24px;
+  font-weight:600;
+  color:var(--pink-dark);
+}
+nav a {
+  margin-left:20px;
+  text-decoration:none;
+  color:var(--text-dark);
+  font-weight:600;
+  position:relative;
+}
+nav a::after {
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  bottom:-4px;
+  left:0;
+  background:var(--pink-dark);
+  transition:width .3s ease;
+}
+nav a:hover::after { width:100%; }
+
+.container {
+  max-width:1000px;
+  margin:2rem auto;
+  padding:0 1rem;
+}
+h1 {
+  text-align:center;
+  font-family:'Playfair Display', serif;
+  margin-bottom:1.5rem;
+  color:var(--pink-dark);
+}
+
+.contact-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:2rem;
+  align-items:start;
+}
+
+.contact-info {
+  background:var(--pink-light);
+  padding:1.5rem;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+.contact-info h2 {
+  font-family:'Playfair Display', serif;
+  margin-bottom:1rem;
+  color:var(--pink-dark);
+}
+.contact-info p {
+  margin:0.5rem 0;
+}
+
+form {
+  background:var(--pink-light);
+  padding:1.5rem;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+form h2 {
+  font-family:'Playfair Display', serif;
+  margin-bottom:1rem;
+  color:var(--pink-dark);
+}
+form label {
+  display:block;
+  margin-top:0.8rem;
+  font-weight:600;
+}
+form input, form textarea, form button {
+  width:100%;
+  padding:10px;
+  margin-top:0.3rem;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-family:'Montserrat', sans-serif;
+}
+form textarea { resize:vertical; min-height:100px; }
+form button {
+  background:var(--pink-dark);
+  color:var(--white);
+  border:none;
+  margin-top:1rem;
+  cursor:pointer;
+  font-weight:600;
+  transition:background 0.3s ease;
+}
+form button:hover { background:#b93a63; }
+
+/* Notification */
+.notification {
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%) translateY(40px);
+  background:var(--pink-dark);
+  color:var(--white);
+  padding:12px 20px;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+  opacity:0;
+  pointer-events:none;
+  transition:all 0.4s ease;
+  z-index:1000;
+}
+.notification.show {
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+  pointer-events:auto;
+}
+
+footer {
+  background: var(--pink-dark);
+  color: var(--white);
+  text-align:center;
+  padding:1.5rem;
+  margin-top:3rem;
+}
+footer a {
+  color:var(--white);
+  margin:0 10px;
+  text-decoration:none;
+  font-size:14px;
+}
+footer a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Aa'In</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="cart.html">Cart</a>
+    <a href="contact.html">Contact</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>Contact Us</h1>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+      <p><strong>Email:</strong> <a href="mailto:aainchocolates@gmail.com">aainchocolates@gmail.com</a></p>
+      <p><strong>Phone:</strong> +971 55 123 4567</p>
+      <p><strong>Address:</strong> Dubai, United Arab Emirates</p>
+      <p><strong>Hours:</strong> Mon–Sat, 10:00am – 8:00pm</p>
+    </div>
+
+    <form id="contactForm">
+      <h2>Send Us a Message</h2>
+      <label for="name">Name *</label>
+      <input type="text" id="name" required>
+      
+      <label for="email">Email *</label>
+      <input type="email" id="email" required>
+      
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone">
+      
+      <label for="message">Message *</label>
+      <textarea id="message" required></textarea>
+      
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+<footer>
+  <p>&copy; 2025 Aa'In Chocolates. All Rights Reserved.</p>
+  <div>
+    <a href="#">Terms of Service</a> | 
+    <a href="#">Refund Policy</a> | 
+    <a href="#">Privacy Policy</a> | 
+    <a href="#">Corporate Social Responsibility</a>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const notification = document.getElementById("notification");
+
+  function showNotification(message) {
+    notification.textContent = message;
+    notification.classList.add("show");
+    setTimeout(() => {
+      notification.classList.remove("show");
+    }, 2500);
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !message) {
+      showNotification("Please fill in all required fields.");
+      return;
+    }
+
+    // Save locally (for demo; replace with backend/email later)
+    let submissions = JSON.parse(localStorage.getItem("contactSubmissions")) || [];
+    submissions.push({ name, email, phone, message, date: new Date().toISOString() });
+    localStorage.setItem("contactSubmissions", JSON.stringify(submissions));
+
+    form.reset();
+    showNotification("Thank you! Your message has been sent.");
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop - Aa'In</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink-light: #ffe6f0;
+  --pink: #f8c6dc;
+  --pink-dark: #e75480;
+  --white: #ffffff;
+  --text-dark: #2c2c2c;
+}
+body {
+  margin:0;
+  font-family:'Montserrat', sans-serif;
+  background:var(--white);
+  color:var(--text-dark);
+}
+header {
+  background: linear-gradient(90deg, var(--pink-light), var(--white));
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 2rem;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+header .brand {
+  font-family: 'Playfair Display', serif;
+  font-size:24px;
+  font-weight:600;
+  color:var(--pink-dark);
+}
+nav a {
+  margin-left:20px;
+  text-decoration:none;
+  color:var(--text-dark);
+  font-weight:600;
+  position:relative;
+}
+nav a::after {
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  bottom:-4px;
+  left:0;
+  background:var(--pink-dark);
+  transition:width .3s ease;
+}
+nav a:hover::after { width:100%; }
+
+.container {
+  max-width:1100px;
+  margin:2rem auto;
+  padding:0 1rem;
+}
+h1 {
+  text-align:center;
+  font-family:'Playfair Display', serif;
+  margin-bottom:2rem;
+  color:var(--pink-dark);
+}
+.products {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.product-card {
+  background:var(--pink-light);
+  padding:1.5rem;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  text-align:center;
+}
+.product-card img {
+  width:100%;
+  max-height:180px;
+  object-fit:cover;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+.product-card h3 {
+  font-family:'Playfair Display', serif;
+  margin:10px 0;
+}
+.price {
+  font-weight:600;
+  color:var(--pink-dark);
+}
+.quantity {
+  width:60px;
+  padding:6px;
+  margin:10px 0;
+  text-align:center;
+}
+button.add-to-cart {
+  background:var(--pink-dark);
+  color:var(--white);
+  border:none;
+  padding:10px 20px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:600;
+  transition:background 0.3s ease;
+}
+button.add-to-cart:hover { background:#b93a63; }
+
+/* ✅ Notification fixed */
+.notification {
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%) translateY(40px);
+  background:var(--pink-dark);
+  color:var(--white);
+  padding:12px 20px;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+  opacity:0;
+  pointer-events:none; /* prevent blocking clicks when hidden */
+  transition:all 0.4s ease;
+  z-index:1000;
+}
+.notification.show {
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+  pointer-events:auto; /* active only while visible */
+}
+
+.custom-order {
+  margin-top:3rem;
+  padding:1.5rem;
+  background:var(--pink-light);
+  border-radius:12px;
+  text-align:center;
+}
+.custom-order h2 {
+  font-family:'Playfair Display', serif;
+  margin-bottom:1rem;
+  color:var(--pink-dark);
+}
+.custom-order a {
+  color:var(--pink-dark);
+  font-weight:600;
+}
+
+footer {
+  background: var(--pink-dark);
+  color: var(--white);
+  text-align:center;
+  padding:1.5rem;
+  margin-top:3rem;
+}
+footer a {
+  color:var(--white);
+  margin:0 10px;
+  text-decoration:none;
+  font-size:14px;
+}
+footer a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Aa'In</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="cart.html">Cart</a>
+    <a href="contact.html">Contact</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>Our Chocolates</h1>
+  
+  <div class="products">
+    <div class="product-card">
+      <img src="cremeofus.png" alt="Crème of Us">
+      <h3>Crème of Us</h3>
+      <p class="price">40 AED</p>
+      <input type="number" class="quantity" value="1" min="1">
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="truematcha.png" alt="True Matcha">
+      <h3>True Matcha</h3>
+      <p class="price">35 AED</p>
+      <input type="number" class="quantity" value="1" min="1">
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="layali.png" alt="Layali">
+      <h3>Layali</h3>
+      <p class="price">45 AED</p>
+      <input type="number" class="quantity" value="1" min="1">
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="custom-order">
+    <h2>Want a Custom Order?</h2>
+    <p>Email us at <a href="mailto:aainchocolates@gmail.com">aainchocolates@gmail.com</a> or <a href="contact.html">send us a message</a>.</p>
+  </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+<footer>
+  <p>&copy; 2025 Aa'In Chocolates. All Rights Reserved.</p>
+  <div>
+    <a href="#">Terms of Service</a> | 
+    <a href="#">Refund Policy</a> | 
+    <a href="#">Privacy Policy</a> | 
+    <a href="#">Corporate Social Responsibility</a>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const addToCartButtons = document.querySelectorAll(".add-to-cart");
+  const notification = document.getElementById("notification");
+
+  function showNotification(message) {
+    notification.textContent = message;
+    notification.classList.add("show");
+    setTimeout(() => {
+      notification.classList.remove("show");
+    }, 2500);
+  }
+
+  addToCartButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const productCard = btn.closest(".product-card");
+      const name = productCard.querySelector("h3").textContent.trim();
+      const price = parseFloat(productCard.querySelector(".price").textContent.replace("AED", "").trim()) || 0;
+      const qtyInput = productCard.querySelector(".quantity");
+      const qty = qtyInput && !isNaN(qtyInput.value) && qtyInput.value > 0 ? parseInt(qtyInput.value) : 1;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingItem = cart.find(item => item.name === name && item.price === price);
+      if (existingItem) {
+        existingItem.qty += qty;
+      } else {
+        cart.push({ name, price, qty });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      showNotification(`${qty} × ${name} added to cart`);
+    });
+  });
+});
+</script>
+</body>
+</html>
